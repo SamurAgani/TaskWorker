@@ -9,16 +9,25 @@ internal class Program
 {
     public static void Main(string[] args)
     {
-        Host.CreateDefaultBuilder(args)
-                  .UseWindowsService() 
+        bool createdNew;
+        using (var mutex = new Mutex(true, "MyServiceMutex", out createdNew))
+        {
+            if (!createdNew)
+            {
+                System.Console.WriteLine("Service is already running.");
+                return;
+            }
+            Host.CreateDefaultBuilder(args)
+                  .UseWindowsService()
                   .ConfigureServices((ctx, services) =>
                   {
                       services.AddSingleton<IWorkerRepository, InMemoryWorkerRepository>();
                       services.AddTransient<IWorkerManagementService, WorkerManagementService>();
-                     
+
                       services.AddHostedService<WorkerManagementHostedService>();
                   })
                   .Build()
                   .Run();
+        }
     }
 }

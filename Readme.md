@@ -13,30 +13,7 @@ This system consists of three main components:
 
 ## Setup Instructions
 
-### 1. Update Paths
-
-Before building the solution, update the file paths in the source code to match your environment.
-
-**a. Administrative CLI Path in `Program.cs`:**
-
-1. Open `Administrative.CLI/Program.cs`.
-2. Update the `servicePath` variable to point to your service executable (`Infrastructure.exe`). For example:
-
-   ```csharp
-   public static string servicePath { get; set; } = @"Path to the your Infrastructure + \Infrastructure\bin\Debug\net8.0\Infrastructure.exe";
-   ```
-
-**b. Worker Path in `WorkerManagementHostedService`:**
-
-1. Open `Infrastructure.ServiceHost/WorkerManagementHostedService.cs`.
-2. Locate the `workerExePath` variable inside the `ADD_WORKER` case.
-3. Update it to point to your worker executable (`Worker.exe`). For example:
-
-   ```csharp
-   var workerExePath = @"Path to the your worker + \Worker\bin\Debug\net8.0\Worker.exe";
-   ```
-
-### 2. Build the Projects
+### 1. Build the Projects
 
 Build all three projects: Service, Administrative.CLI, and Worker.
 
@@ -48,7 +25,7 @@ dotnet build
 
 Or open the solution in Visual Studio and build the entire solution.
 
-### 3. Run Administrative CLI
+### 2. Run Administrative CLI
 
 After updating paths and building the projects, run the Administrative CLI as an administrator:
 
