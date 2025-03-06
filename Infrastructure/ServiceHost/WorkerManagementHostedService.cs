@@ -1,16 +1,8 @@
 ﻿using Application.Services;
-using Domain;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO.Pipes;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.ServiceHost
 {
@@ -49,14 +41,8 @@ namespace Infrastructure.ServiceHost
                         4096
                     );
 
-                    //pipeServer.SetAccessControl(pipeSecurity);
                     await pipeServer.WaitForConnectionAsync(token);
                     _ = Task.Run(() => HandleAdminConnection(pipeServer, token), token);
-
-                    //while (!token.IsCancellationRequested && pipeServer.IsConnected)
-                    //{
-                    //    await HandleAdminConnection(pipeServer, token);
-                    //}
                 }
 
             }
@@ -91,7 +77,7 @@ namespace Infrastructure.ServiceHost
                             var name = parts.Length > 1 ? parts[1] : "UnnamedWorker";
                             var worker = svc.AddWorker(name);
 
-                            var workerExePath = @"C:\Users\user\Desktop\JustTestMyself\TaskWorker\Worker\bin\Debug\net8.0\Worker.exe";
+                            var workerExePath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\..\Worker\bin\Debug\net8.0\Worker.exe"));
                             Process.Start(new ProcessStartInfo
                             {
                                 FileName = workerExePath,

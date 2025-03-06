@@ -1,11 +1,5 @@
-﻿using Domain;
-using System;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Diagnostics;
 using System.IO.Pipes;
-using System.Security.AccessControl;
-using System.Security.Principal;
-using System.Threading.Tasks;
 
 namespace Worker
 {

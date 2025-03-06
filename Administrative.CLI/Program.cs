@@ -8,9 +8,14 @@ namespace Administrative.CLI
 {
     public class Program
     {
-        public static string servicePath { get; set; } = @$"C:\Users\user\Desktop\JustTestMyself\TaskWorker\Infrastructure\bin\Debug\net8.0\Infrastructure.exe";
+        public static string servicePath
+        {
+            get { return Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\..\Infrastructure\bin\Debug\net8.0\Infrastructure.exe")); }
+            set { servicePath = value; }
+        }
         public static async Task Main(string[] args)
         {
+
             while (true)
             {
                 if (args.Length == 0)
