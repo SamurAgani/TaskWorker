@@ -73,6 +73,10 @@ namespace Administrative.CLI
                             await Status(null);
                         break;
 
+                    case "clear":
+                        Console.Clear();
+                        break;
+
                     case "service":
                         if (args.Length < 2)
                         {
@@ -100,6 +104,7 @@ namespace Administrative.CLI
                         break;
 
                     case "exit":
+                        await ServiceStop();
                         return;
 
                     default:
@@ -157,6 +162,7 @@ namespace Administrative.CLI
             Console.WriteLine("  status [WorkerId]          - Show status of all or one worker");
             Console.WriteLine("  service <start|stop|status> - Manage the service");
             Console.WriteLine("  help                       - Show this help text");
+            Console.WriteLine("  clear                       - Cleaning the screen");
             Console.WriteLine("  exit                       - Exit the CLI");
         }
 
