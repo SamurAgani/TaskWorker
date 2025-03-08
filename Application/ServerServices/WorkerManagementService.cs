@@ -1,8 +1,7 @@
 ﻿using Application.DTOs;
 using Domain.Entities;
-using Domain.Interfaces;
 
-namespace Application.Services
+namespace Application.ServerServices
 {
     public class WorkerManagementService : IWorkerManagementService
     {

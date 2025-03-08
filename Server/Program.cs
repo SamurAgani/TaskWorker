@@ -1,9 +1,7 @@
-﻿using Application.Services;
-using Domain.Interfaces;
-using Infrastructure.Repositories;
-using Infrastructure.ServiceHost;
+﻿using Server.ServiceHost;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Application.ServerServices;
 
 internal class Program
 {
@@ -14,7 +12,6 @@ internal class Program
         {
             if (!createdNew)
             {
-                System.Console.WriteLine("Service is already running.");
                 return;
             }
             Host.CreateDefaultBuilder(args)
@@ -23,6 +20,7 @@ internal class Program
                   {
                       services.AddSingleton<IWorkerRepository, InMemoryWorkerRepository>();
                       services.AddTransient<IWorkerManagementService, WorkerManagementService>();
+                      services.AddTransient<IServerCommandHandler, ServerCommandHandler>();
 
                       services.AddHostedService<WorkerManagementHostedService>();
                   })

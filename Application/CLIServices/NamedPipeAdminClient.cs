@@ -1,12 +1,12 @@
 ﻿using System.IO.Pipes;
 
-namespace Administrative.CLI
+namespace Application.CLIServices
 {
-    public static class NamedPipeAdminClient
+    public class NamedPipeAdminClient : INamedPipeAdminClient
     {
         private const string ADMIN_PIPE = "MyAdminPipe";
 
-        public static async Task<string> SendCommandAsync(string command)
+        public async Task<string> SendCommandAsync(string command)
         {
             StreamReader? reader = null;
             StreamWriter? writer = null;
@@ -51,11 +51,11 @@ namespace Administrative.CLI
             {
                 if (writer != null)
                 {
-                    try { writer.Dispose(); } catch {  }
+                    try { writer.Dispose(); } catch { }
                 }
                 if (reader != null)
                 {
-                    try { reader.Dispose(); } catch {  }
+                    try { reader.Dispose(); } catch { }
                 }
             }
         }

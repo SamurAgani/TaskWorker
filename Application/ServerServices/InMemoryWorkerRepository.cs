@@ -1,7 +1,5 @@
 ﻿using Domain.Entities;
-using Domain.Interfaces;
-
-namespace Infrastructure.Repositories
+namespace Application.ServerServices
 {
     public class InMemoryWorkerRepository : IWorkerRepository
     {
